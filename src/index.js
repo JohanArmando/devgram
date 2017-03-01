@@ -1,3 +1,13 @@
-var numeros = [1 ,2 ,3 ,4 ,5];
+var page = require('page');
 
-numeros.map( n => console.log( n+1) );
+var main = document.getElementById('main-container');
+
+page('/' , function (ctx ,next) {
+   main.innerHTML = 'home <a href="/signup">Registrarse </a>';
+});
+
+page('/signup' , function (ctx ,next) {
+    main.innerHTML = 'Singup <a href="/">Home</a>';
+});
+
+page();

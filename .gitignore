@@ -8,6 +8,7 @@
 .idea/tasks.xml
 
 /node_modules
+/public
 
 # Sensitive or high-churn files:
 .idea/dataSources/
