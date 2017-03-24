@@ -4,7 +4,9 @@
   "description": "Comparte las fotos de tu amor",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp",
+    "start": "gulp watch & node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,19 +24,24 @@
   },
   "homepage": "https://github.com/JohanArmando/devgram#readme",
   "dependencies": {
+    "empty-element": "^1.0.0",
     "express": "^4.14.1",
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "jade": "^1.11.0",
     "materialize-css": "^0.98.0",
     "page": "^1.7.1",
-    "pug": "^2.0.0-beta11"
+    "pug": "^2.0.0-beta11",
+    "yo-yo": "^1.4.0"
   },
   "devDependencies": {
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
-    "vinyl-source-stream": "^1.1.0"
+    "source-map": "^0.5.6",
+    "uglify-js": "^2.8.14",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
   }
 }

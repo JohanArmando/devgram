@@ -4,6 +4,7 @@ var rename = require('gulp-rename');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+const wachify = require('watchify');
 
 gulp.task('styles' , function () {
     gulp
@@ -19,13 +20,32 @@ gulp.task('assets' , function () {
         .pipe(gulp.dest('public'));
 });
 
-gulp.task('scripts' , function () {
-    browserify('./src/index.js')
-        .transform(babelify)
-        .bundle()
-        .pipe(source('index.js'))
-        .pipe(rename('app.js'))
-        .pipe(gulp.dest('public'));
-});
+function compile(watch)  {
+    var bundle = wachify(browserify('./src/index.js'));
 
-gulp.task('default' , ['styles' , 'assets' , 'scripts']);
+    function  rebundle() {
+        bundle
+            .transform(babelify)
+            .bundle()
+            .on('error' , (error) => {
+                console.log(error)
+            })
+            .pipe(source('index.js'))
+            .pipe(rename('app.js'))
+            .pipe(gulp.dest('public'));
+    }
+
+    if (watch){
+        bundle.on('update' , () => {
+            console.log('--> Bunling ...');
+            rebundle();
+        })
+    }
+
+    rebundle();
+}
+
+gulp.task('build' , () => { compile() });
+gulp.task('watch' , () => { compile(true) });
+
+gulp.task('default' , ['styles' , 'assets'  , 'build']);
